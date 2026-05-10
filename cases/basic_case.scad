@@ -31,8 +31,7 @@ module itemModule()
     difference()
     {
         // Exterior:
-        hull() doubleX() doubleY() translate([cornerCtrX, cornerCtrY, 0]) 
-            simpleChamferedCylinderDoubleEnded(d=cornerDIaXY, h=exteriorZ, cz=exteriorCZ);
+        hull() cornerXform() simpleChamferedCylinderDoubleEnded(d=cornerDIaXY, h=exteriorZ, cz=exteriorCZ);
 
         // interior:
         hull() doubleX() doubleY() translate([cornerCtrX, cornerCtrY, wallZ]) 
@@ -46,8 +45,15 @@ module itemModule()
         // tcu([-usbCutX/2, 0, wallZ], [usbCutX, 100, 100]);
 
         // Button and USB cut:
-        tcu([-100, boardY/2-12, wallZ], 200);
+        tcu([-100, boardY/2-12, -10], 200);
     }
+
+    hull() cornerXform() simpleChamferedCylinderDoubleEnded(d=cornerDIaXY, h=wallZ, cz=exteriorCZ);
+}
+
+module cornerXform()
+{
+    doubleX() doubleY() translate([cornerCtrX, cornerCtrY, 0]) children();
 }
 
 module standoffsXform(z)
