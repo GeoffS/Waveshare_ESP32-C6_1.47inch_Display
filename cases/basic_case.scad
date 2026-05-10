@@ -40,13 +40,6 @@ module itemModule()
 
         // Screw holes:
         standoffsXform(z=-10) cylinder(d=screwHoleDia, h=100);
-        // usbHoleCtrX = boardX/2 - standoffCtsOffsetUsbEndX;
-        // usbHoleCtrY = boardY/2 - standoffCtsOffsetUsbEndY;
-        // doubleX() translate([usbHoleCtrX, usbHoleCtrY, -10]) cylinder(d=screwHoleDia, h=100);
-
-        // antHoleCtrX = boardX/2 - standoffCtsOffsetAntennaEndX;
-        // antHoleCtrY = -boardY/2 + standoffCtsOffsetAntennaEndY;
-        // doubleX() translate([antHoleCtrX, antHoleCtrY, -10]) cylinder(d=screwHoleDia, h=100);
     }
 }
 
