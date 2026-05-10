@@ -15,16 +15,16 @@ standoffCtsOffsetAntennaEndY = 1.97;
 
 screwHoleDia = 2.4; // m2 clearance
 
-extraXY = 3;
+extraXY = 4;
 wallXY = 3;
 wallZ = 3;
 
-cornerDIaXY = 8;
+cornerDIaXY = 10;
 exteriorCZ = 1;
 exteriorZ = 10;
 
-cornerCtrX = boardX/2 + extraXY;
-cornerCtrY = boardY/2 + extraXY;
+cornerCtrX = boardX/2 + extraXY - cornerDIaXY/2;
+cornerCtrY = boardY/2 + extraXY - cornerDIaXY/2;
 
 module itemModule()
 {
