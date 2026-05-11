@@ -3,7 +3,9 @@
 This repo contains various bits of code and designs I created 
 while learning about this board.
 
-## Documentation:
+## [3D-Printable Case Designs](cases)
+
+## Board Documentation:
 [Waveshare Wiki Page](https://www.waveshare.com/wiki/ESP32-C6-LCD-1.47_)
 
 ## Board image:
