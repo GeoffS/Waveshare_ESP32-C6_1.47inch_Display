@@ -13,15 +13,16 @@ standoffCtsOffsetUsbEndY = 2.4;
 standoffCtsOffsetAntennaEndX = 3.52;
 standoffCtsOffsetAntennaEndY = 1.97;
 
-screwHoleDia = 2.4; // m2 clearance
+screwHoleDia = 2.5; // m2 clearance
 
 extraXY = 4;
 wallXY = 3;
-wallZ = 4;
+wallZ = 4.2;
+standoffZ = 2;
 
 cornerDIaXY = 10;
 exteriorCZ = 1;
-exteriorZ = 8 + wallZ;
+exteriorZ = 9 + wallZ + standoffZ;
 
 cornerCtrX = boardX/2 + extraXY - cornerDIaXY/2;
 cornerCtrY = boardY/2 + extraXY - cornerDIaXY/2;
@@ -41,8 +42,7 @@ module itemModule()
         // interior:
         translate([0,0,wallZ]) hull() cornerXform(offsetY=cornerOffsetY) cylinder(d=cornerDIaXY-wallXY, h=100);
 
-        // Screw holes:
-        standoffsXform(z=-10) cylinder(d=screwHoleDia, h=100);
+        screwHoled();
 
         // // USB-C cutout:
         // usbCutX = 13;
@@ -51,6 +51,13 @@ module itemModule()
         // Button and USB cut:
         cutX = boardX + 2;
         tcu([-cutX/2, 0, wallZ], [cutX, 200, 200]);
+    }
+
+    // Standoffs:
+    difference()
+    {
+        standoffsXform(z=wallZ-nothing) simpleChamferedCylinder(d=6, h=standoffZ, cz=4*layerHeight);
+        screwHoled();
     }
 }
 
@@ -71,6 +78,11 @@ module standoffsXform(z)
     doubleX() translate([antHoleCtrX, antHoleCtrY, z]) children();
 }
 
+module screwHoled()
+{
+    standoffsXform(z=-10) cylinder(d=screwHoleDia, h=100);
+}
+
 module clip(d=0)
 {
 	// tc([-200, -400-d, -10], 400);
@@ -88,14 +100,14 @@ else
 
 module boardGhost()
 {
-    standoffZ = 2;
+    boardStandoffZ = 2.5;
 
     difference()
     {
-        union()
+        translate([0,0,standoffZ]) union()
         {
-            hull() doubleX() doubleY() translate([boardX/2-1, boardY/2-1, wallZ + standoffZ]) cylinder(d=2, h=4);
-            standoffsXform(z=wallZ) cylinder(d=3.5, h=standoffZ);
+            hull() doubleX() doubleY() translate([boardX/2-1, boardY/2-1, wallZ + boardStandoffZ]) cylinder(d=2, h=5.75);
+            standoffsXform(z=wallZ) cylinder(d=3.5, h=boardStandoffZ);
         }
         
         standoffsXform(z=-10) cylinder(d=2, h=100);
